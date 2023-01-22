@@ -27,19 +27,6 @@ describe('Basic freshStorage Tests', () => {
     });
   });
 
-  it('won\'t return expired data.', () => {
-    cy.window().then(window => {
-      const {freshStorage, localStorage} = window;
-      localStorage.clear();
-      expect(localStorage).to.be.empty;
-      freshStorage.setItem('key1', 'value1', '100ms');
-      expect(localStorage).to.not.be.empty;
-      setTimeout(()=>{
-        expect(freshStorage.getItem('key1')).to.be.undefined;
-      }, 110);
-    });
-  });
-
   it('will manage multiple key/value pairs.', () => {
     cy.window().then(window => {
       const {freshStorage, localStorage} = window;
@@ -49,6 +36,46 @@ describe('Basic freshStorage Tests', () => {
       freshStorage.setItem('key2', 'value2', '100ms');
       expect(localStorage).to.not.be.empty;
       expect(localStorage.length).to.equal(2);
+    });
+  });
+
+  it('can remove a key/value pair.', () => {
+    cy.window().then(window => {
+      const {freshStorage, localStorage} = window;
+      localStorage.clear();
+      expect(localStorage).to.be.empty;
+      freshStorage.setItem('key1', 'value1', '1000ms');
+      expect(localStorage).to.not.be.empty;
+      expect(localStorage.length).to.equal(1);
+      freshStorage.removeItem('key1');
+      expect(localStorage).to.be.empty;
+    });
+  });
+
+  it('can clear all key/value pairs.', () => {
+    cy.window().then(window => {
+      const {freshStorage, localStorage} = window;
+      localStorage.clear();
+      expect(localStorage).to.be.empty;
+      freshStorage.setItem('key1', 'value1', '100ms');
+      freshStorage.setItem('key2', 'value2', '100ms');
+      expect(localStorage).to.not.be.empty;
+      expect(localStorage.length).to.equal(2);
+      freshStorage.clear();
+      expect(localStorage).to.be.empty;
+    });
+  });
+
+  it('won\'t return expired data.', () => {
+    cy.window().then(window => {
+      const {freshStorage, localStorage} = window;
+      localStorage.clear();
+      expect(localStorage).to.be.empty;
+      freshStorage.setItem('keyAsync1', 'value1', '100ms');
+      expect(localStorage).to.not.be.empty;
+      setTimeout(()=>{
+        expect(freshStorage.getItem('key1')).to.be.undefined;
+      }, 110);
     });
   });
 })

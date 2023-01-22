@@ -22,7 +22,7 @@ export class StoreManager {
 
   removeItem(key) {
     this.validateKey(key);
-    localStorage.removeItem(key);
+    localStorage.removeItem(PREFIX + key);
   }
 
   validateKey(key) {
@@ -62,5 +62,13 @@ export class StoreManager {
       }
     });
     return storedItems;
+  }
+
+  clear() {
+    const items = this.getAllItems();
+    const keys = Object.keys(items);
+    keys.forEach(key => {
+      localStorage.removeItem(key);
+    });
   }
 }

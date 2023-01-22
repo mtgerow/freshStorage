@@ -19,6 +19,14 @@ export class FreshStorage {
     const item = storeManager.getItem(key);
     return item;
   }
+
+  clear() {
+    storeManager.clear();
+  }
+
+  removeItem(key) {
+    storeManager.removeItem(key);
+  }
 }
 
 if(!window.freshStorage) {
