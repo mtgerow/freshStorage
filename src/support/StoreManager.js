@@ -9,7 +9,7 @@ export class StoreManager {
     if (item) {
       item = JSON.parse(item);
     }
-    return this.isExpired(item) ? undefined : item.data;
+    return !item || this.isExpired(item) ? undefined : item.data;
   }
 
   setItem(key, value) {
@@ -27,23 +27,23 @@ export class StoreManager {
 
   validateKey(key) {
     if(!key || typeof key !== 'string') {
-      throw new Error("[Error 0011] The key is not in a proper format. Required: string format for all keys.")
+      throw new Error("[011] The key is not in a proper format. Required: string format for all keys.")
     }
   }
 
   validateStoreObject(value) {
     if(!value || typeof value !== 'object') {
-      throw new Error("[Error 012] The item must be in the correct object form.");
+      throw new Error("[012] The item must be in the correct object form.");
     }
     const {config, exp, type} = value;
     if(!type || !isValidType(type)) {
-      throw new Error("[Error 013] The item does not have a valid type.")
+      throw new Error("[013] The item does not have a valid type.")
     }
     if(!config || typeof config !== 'object') {
-      throw new Error("[Error 014] The item does not have a valid configuration.");
+      throw new Error("[014] The item does not have a valid configuration.");
     }
     if(!exp || this.isExpired(value)) {
-      throw new Error("[Error 015] The item is expired.")
+      throw new Error("[015] The item is expired.")
     }
   }
 

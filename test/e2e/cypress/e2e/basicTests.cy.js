@@ -73,9 +73,7 @@ describe('Basic freshStorage Tests', () => {
       expect(localStorage).to.be.empty;
       freshStorage.setItem('keyAsync1', 'value1', '100ms');
       expect(localStorage).to.not.be.empty;
-      setTimeout(()=>{
-        expect(freshStorage.getItem('key1')).to.be.undefined;
-      }, 110);
+      cy.wait(150).then(()=>expect(freshStorage.getItem('keyAsync1')).to.be.undefined);
     });
   });
 })
