@@ -3,29 +3,31 @@ import { DataBuilder } from './support/DataBuilder';
 import { GarbageCollector } from './support/GarbageCollector';
 import { DateParser } from './support/DateParser';
 
-const storeManager = new StoreManager();
-const dataBuilder = new DataBuilder();
-new GarbageCollector(storeManager);
-const dateParser = new DateParser();
-
 export class FreshStorage {
+  constructor() {
+    this.storeManager = new StoreManager();
+    this.dataBuilder = new DataBuilder();
+    new GarbageCollector(this.storeManager);
+    this.dateParser = new DateParser();
+  }
+
   setItem(key, value, expiration) {
-    const exp = dateParser.parse(expiration);
-    const item = dataBuilder.buildBasicDataItem(value, exp.getTime());
-    storeManager.setItem(key, item);
+    const exp = this.dateParser.parse(expiration);
+    const item = this.dataBuilder.buildBasicDataItem(value, exp.getTime());
+    this.storeManager.setItem(key, item);
   }
 
   getItem(key) {
-    const item = storeManager.getItem(key);
+    const item = this.storeManager.getItem(key);
     return item;
   }
 
   clear() {
-    storeManager.clear();
+    this.storeManager.clear();
   }
 
   removeItem(key) {
-    storeManager.removeItem(key);
+    this.storeManager.removeItem(key);
   }
 }
 

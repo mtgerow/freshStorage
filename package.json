@@ -1,6 +1,6 @@
 {
   "name": "freshstorage",
-  "version": "0.1.2",
+  "version": "0.2.3",
   "description": "A fresh approach to localStorage. ",
   "main": "index.js",
   "scripts": {

@@ -4,7 +4,7 @@ export class GarbageCollector
 {
   constructor(storeManager) {
     this.manager = storeManager;
-    setInterval(this.removeUnused, 1000*60*5)
+    setInterval(this.removeUnused, 1000*60*2)
   }
 
   removeUnused() {
