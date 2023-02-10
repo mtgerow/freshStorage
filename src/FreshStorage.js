@@ -3,7 +3,7 @@ import { DataBuilder } from './support/DataBuilder';
 import { GarbageCollector } from './support/GarbageCollector';
 import { DateParser } from './support/DateParser';
 
-export class FreshStorage {
+class FreshStorage {
   constructor() {
     this.storeManager = new StoreManager();
     this.dataBuilder = new DataBuilder();

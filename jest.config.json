@@ -1,0 +1,4 @@
+{
+	"testMatch": ["<rootDir>/test/**/*.(test|spec).js"],
+	"setupFilesAfterEnv": []
+}

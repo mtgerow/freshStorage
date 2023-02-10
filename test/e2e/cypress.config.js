@@ -6,7 +6,7 @@ export default defineConfig({
   e2e: {
     setupNodeEvents(on) {
       on(
-        'file:preprocessor',
+        'dev-server:start',
         vitePreprocessor('./vite.config.js')
       )
     },
