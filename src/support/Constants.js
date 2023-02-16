@@ -7,3 +7,5 @@ export const STORAGE_TYPES = {
 export const isValidType = (type) => {
   return Object.values(STORAGE_TYPES).indexOf(type) > -1;
 }
+
+export const DATE_KEY = '__fs_date__';

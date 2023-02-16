@@ -1,4 +1,4 @@
-import {STORAGE_TYPES} from './Storage.types';
+import {STORAGE_TYPES} from './Constants.js';
 
 export class GarbageCollector
 {

@@ -1,15 +1,20 @@
-import {isValidType} from './Storage.types';
+import {isValidType} from './Constants.js';
+import { DataParser } from './DataParser.js';
 
 export const PREFIX = 'fresh_storage_';
 
 export class StoreManager {
+  constructor() {
+    this.dataParser = new DataParser();
+  }
+
   getItem(key) {
     this.validateKey(key);
     let item = localStorage.getItem(PREFIX + key);
     if (item) {
       item = JSON.parse(item);
     }
-    return !item || this.isExpired(item) ? undefined : item.data;
+    return !item || this.isExpired(item) ? undefined : this.dataParser.parse(item.data);
   }
 
   setItem(key, value) {

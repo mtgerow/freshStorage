@@ -39,7 +39,7 @@ describe('freshStorage Variable Type Tests', () => {
   });
 
 
-  it.skip('can store and retrieve a date.', () => {
+  it('can store and retrieve a date.', () => {
     cy.window().then(window => {
       const {freshStorage, localStorage} = window;
       localStorage.clear();
