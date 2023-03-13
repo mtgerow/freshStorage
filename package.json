@@ -1,6 +1,6 @@
 {
   "name": "freshstorage",
-  "version": "0.4.2",
+  "version": "0.5.1",
   "description": "A fresh approach to localStorage. ",
   "main": "dist/main.js",
   "module": "dist/main.js",

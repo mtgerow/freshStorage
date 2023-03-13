@@ -74,18 +74,4 @@ describe('freshStorage Variable Type Tests', () => {
       expect(freshStorage.getItem('key1')).to.be.null;
     });
   });
-
-  it('can store and retrieve undefined.', () => {
-    cy.window().then(window => {
-      const {freshStorage, localStorage} = window;
-      localStorage.clear();
-      const value = undefined;
-      expect(localStorage).to.be.empty;
-      freshStorage.setItem('key1', value, '1d');
-      expect(localStorage).to.not.be.empty;
-      expect(freshStorage.getItem('key1')).to.be.undefined;
-    });
-  });
-
-
 })

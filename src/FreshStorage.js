@@ -7,7 +7,7 @@ class FreshStorage {
   constructor() {
     this.storeManager = new StoreManager();
     this.dataBuilder = new DataBuilder();
-    new GarbageCollector(this.storeManager);
+    this.collector = new GarbageCollector();
     this.dateParser = new DateParser();
   }
 
@@ -28,6 +28,10 @@ class FreshStorage {
 
   removeItem(key) {
     this.storeManager.removeItem(key);
+  }
+
+  clean() {
+    this.collector.removeUnused(this.storeManager);
   }
 }
 

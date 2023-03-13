@@ -10,5 +10,9 @@ export default defineConfig({
         vitePreprocessor('./vite.config.js')
       )
     },
+    specPattern: [
+      'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
+      'cypress/e2e/**/*.cy.slow.{js,jsx,ts,tsx}'
+    ]
   },
 });

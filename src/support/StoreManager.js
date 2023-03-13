@@ -1,7 +1,7 @@
 import {isValidType} from './Constants.js';
 import { DataParser } from './DataParser.js';
 
-export const PREFIX = 'fresh_storage_';
+export const PREFIX = '__fs__';
 
 export class StoreManager {
   constructor() {
@@ -14,7 +14,7 @@ export class StoreManager {
     if (item) {
       item = JSON.parse(item);
     }
-    return !item || this.isExpired(item) ? undefined : this.dataParser.parse(item.data);
+    return !item || this.isExpired(item) ? null : this.dataParser.parse(item.data);
   }
 
   setItem(key, value) {
@@ -63,7 +63,10 @@ export class StoreManager {
     let keys = Object.keys(localStorage);
     keys.forEach((key)=> {
       if(key.startsWith(PREFIX)) {
-        storedItems[key] = localStorage.getItem(key);
+        const item = localStorage.getItem(key);
+        if (item) {
+          storedItems[key] = JSON.parse(item);
+        }
       }
     });
     return storedItems;

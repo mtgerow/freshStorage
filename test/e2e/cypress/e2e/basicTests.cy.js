@@ -21,7 +21,7 @@ describe('Basic freshStorage Tests', () => {
       expect(localStorage).to.be.empty;
       freshStorage.setItem('key1', 'value1', '1d');
       expect(localStorage).to.not.be.empty;
-      const fullObj = JSON.parse(localStorage.getItem('fresh_storage_key1'));
+      const fullObj = JSON.parse(localStorage.getItem('__fs__key1'));
       expect(fullObj).to.not.be.undefined;
       expect(fullObj.exp).to.be.greaterThan(new Date().getTime());
     });
@@ -73,7 +73,7 @@ describe('Basic freshStorage Tests', () => {
       expect(localStorage).to.be.empty;
       freshStorage.setItem('keyAsync1', 'value1', '100ms');
       expect(localStorage).to.not.be.empty;
-      cy.wait(150).then(()=>expect(freshStorage.getItem('keyAsync1')).to.be.undefined);
+      cy.wait(150).then(()=>expect(freshStorage.getItem('keyAsync1')).to.be.null);
     });
   });
 })

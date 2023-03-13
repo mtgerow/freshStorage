@@ -8,7 +8,7 @@ describe('Basic freshStorage Tests', () => {
       const {freshStorage, localStorage} = window;
       localStorage.clear();
       expect(localStorage).to.be.empty;
-      expect(freshStorage.getItem('key1')).to.be.undefined;
+      expect(freshStorage.getItem('key1')).to.be.null;
     });
   });
 
