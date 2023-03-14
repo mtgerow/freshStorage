@@ -1,4 +1,3 @@
-const JAN_1_2022= 1667307600011;
 export const SECONDS_TO_MILLI = 1000, MINUTES_TO_MILLI = 60*SECONDS_TO_MILLI, HOURS_TO_MILLI = 60*MINUTES_TO_MILLI;
 export const DAYS_TO_MILLI = 24*HOURS_TO_MILLI, WEEKS_TO_MILLI = 7*DAYS_TO_MILLI;
 
@@ -10,8 +9,8 @@ export class DateParser {
     else if (typeof input === 'object' && Object.prototype.toString.call(input) === '[object Date]') {
       return input;
     }
-    else if (!isNaN(input) && input > JAN_1_2022) {
-      return new Date(input);
+    else if (!isNaN(input) && input > 0) {
+      return getRelativeDate(`${input}ms`);
     }
     else if (/^[\-0-9]{1,10}[ms,s,m,h,d,w,M,y]{1,2}$/.test(input)) {
       return getRelativeDate(input);

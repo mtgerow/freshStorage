@@ -13,10 +13,10 @@ describe('DateParser functionality tests.', ()=>{
     expect(result).toEqual(now);
   });
 
-  it('returns date object if millisecond time is passed in.', () =>{
+  it('returns relative date object if milliseconds are passed in.', () =>{
     const now = new Date();
-    const result = dateParser.parse(now.getTime());
-    expect(result).toEqual(now);
+    const result = dateParser.parse(123);
+    expect(result.getTime()).toEqual(now.getTime() + 123);
   });
 
   it('returns date object if relative time offset by milliseconds is passed in.', () =>{

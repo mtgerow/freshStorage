@@ -29,7 +29,7 @@ freshStorage has the same two primary functions as localStorage:
 1. setItem
 2. getItem
 
-freshStorage is used similarly to localStorage. A key should be used to store an item and that same key would be used to retrieve that item from. The biggest difference is that when the item is stored an expiration is set for how long that item will be stored and valid (fresh). 
+freshStorage is used similarly to localStorage. A key should be used to store an item and that same key would be used to retrieve that item. The biggest difference from localStorage is every item is stored with an expiration that defines how long that item is valid (fresh). 
 
 ```javascript
    freshStorage.setItem(key, item, expiration);
@@ -42,7 +42,7 @@ freshStorage is used similarly to localStorage. A key should be used to store an
 
 **item** - An item can be a boolean, number, string, Date, array or object. Unlike localStorage there is no need to use JSON.stringify or JSON.parse for anything other than a string. The stringify and parsing will happen for you.
 
-**expiration** - The expiration is how long the item is valid. Often data is valid for a specific time. This expiration time can be in mulple formats. this can be a Date object, number of milliseconds since epoch time, or a shorthand relative date string. The relative date string is in the format of a 1-9 digit number followed by a character code. For more information about relative date strings you can see our docs, the examples below and the relative date codes table below.
+**expiration** - The expiration is how long the item is valid. Often data is valid for a specific time. This expiration time can be in multiple formats. Th expiration paramter can accept either a number of milliseconds into the future, a Date object, or a shorthand relative date string. The relative date string is in the format of a 1-9 digit number followed by a character code. For more information about relative date strings you can see our docs, the examples below and the relative date codes table below.
 
 More details about how the key or item is stored or working with expirations, can be found in our documentation.
 
@@ -52,22 +52,22 @@ More details about how the key or item is stored or working with expirations, ca
 ```javascript
 import freshStorage from 'freshstorage'
 
-freshStorage.setItem('protein', 'carnitas', '15m');
+freshStorage.setItem('protein', 'carnitas', 60000);
 
 const protein = freshStorage.getItem('protein'); // returns 'carnitas'
 ```
-In this example, a string with value `carnitas` is stored under the key `protein` for 15 minutes using a shorthand relative date string. Then the item is retrieved within the expiration time using that same key. 
+In this example, a string with value `carnitas` is stored under the key `protein` for 60000 milliseconds (1 minute). Then the item is retrieved within the expiration time using that same key. 
 
 Any item retrieved before the expiration is considered `fresh` and will be retrieved.
 
 **Example 2:**\
-Storing an array using milliseconds:
+Storing an array using shorthand:
 ```javascript
 const veggies = ['lettuce', 'tomato', 'jalapeno'];
 
-freshStorage.setItem('vegetables', veggies, 1852621203400);
+freshStorage.setItem('vegetables', veggies, '30m');
 ```
-This time a more complex object, an `array` of `veggies`, is stored until the date `15 September 2028 (GMT)` using a method of milliseconds since epoch time. If the item is retrieved before the expiration date, the item is considered fresh and the fresh vegetable array is returned.
+This time a more complex object, an `array` of `veggies`, is stored with an expiration of `30m` (shorthand date string) which equates to 30 minutes. If the item is retrieved before the expiration date, the item is considered fresh and the fresh vegetable array is returned.
 
 **Example 3:**\
 Stale item is not returned:
@@ -78,7 +78,7 @@ const burrito = {
  heatRating: 3,
 };
 
-freshStorage.setItem('entree', burrito, '3s');
+freshStorage.setItem('entree', burrito, 3000);
 
 setTimeout(() => {
     freshStorage.getItem('entree'); // returns null
